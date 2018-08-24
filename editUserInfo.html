@@ -6,88 +6,47 @@
     <meta name="viewport" content="width=640,target-densitydpi=device-dpi,user-scalable=no" />
     <title>完善个人信息</title>   
     <script src="jweixin-1.3.2.js"></script>
-    <script src=" jquery-1.11.2.min.js"></script>
+    <script src="jquery-1.11.2.min.js"></script>
+    <script src="fun.js?3"></script>
+
 </head>
 
 <body>
 <script>
-
 pboxStatus = false;
+
 // 微信内初始化 start
 function ready() {
-  console.log(window.__wxjs_environment === 'miniprogram') // true
-  $(".nickname").val( decodeURI(getParamer( 'userName')) )
-  $(".age").val( decodeURI(getParamer('age')) )
-  $(".company").val( decodeURI(getParamer('company')) )
-  $(".position").val( decodeURI(getParamer('position')) )
-  $(".phone").val( decodeURI(getParamer('phone')) )
-  $(".email").val( decodeURI(getParamer('email')) )
-
-  
-  sessionId = getParamer('sessionId')
+    console.log(window.__wxjs_environment === 'miniprogram') // true
+    // $(".pagetitle").html(location.search) //获取URL参数
 }
 if (!window.WeixinJSBridge || !WeixinJSBridge.invoke) {
-  document.addEventListener('WeixinJSBridgeReady', ready, false)
+    document.addEventListener('WeixinJSBridgeReady', ready, false)
 } else {
-  ready()
+    ready()
 }
 // 微信内初始化 end
 
 
-//解析url参数 start
-function getParamer(paramer){
-    var url=window.location.href.split("?")[1];            /*获取url里"?"后面的值*/
-    if(url.indexOf("&")>0){                                      /*判断是否是一个参数还是多个参数*/
-        urlParamArry=url.split("&");                            /*分开每个参数，并放到数组里*/
-        for(var i=0; i<urlParamArry.length; i++){
-            var paramerName=urlParamArry[i].split("=");   /*把每个参数名和值分开，并放到数组里*/
-            if(paramer==paramerName[0]){                     /*匹配输入的参数和数组循环出来的参数是否一样*/
-                // $(".pagetitle").html("改变信息....")
-                return paramerName[1];                           /*返回想要的参数值*/
-            }
-        }
-    }else{                                                              /*判断只有个参数*/
-        var paramerValue=url.split("=")[1];
-        return paramerValue;
-    }
-}
+
 
 
 //获取图形验证码
 function getImgCode(){
-    console.log("跨域请求开始")
-    console.log(getParamer('sessionId'))
-    console.log(getParamer('uid'))
-
     var phone   = $("input.phone").val()
     if(!phone){
         alert("请先填写手机号码")
         return false;
     }
 
-    var header = {
-        "userId": getParamer('uid'),
-        "sessionId": getParamer('sessionId')
-    };
-    $.ajax({
-        type: "GET",
-        data: {},
-        contentType: "application/json",
-        url: "http://www.view-ol.com/viewol_web/fuser/getImgRand?userId="+getParamer('uid'),
-        beforeSend: function (xhr) {
-            if(header){
-                for(name in header){
-                    xhr.setRequestHeader(name, header[name]);
-                }
-            }
-        },
-        success: function (data) {
-            var re = JSON.parse(data)
-            // console.log(re.result);
-            var base64Img = "data:image/png;base64,"+re.result
-            var imgHtml = '<img src="'+base64Img+'" >'
-            $(".imgCodebox").html(imgHtml)
-        },
+    var url = "https://www.view-ol.com/viewol_web/fuser/getImgRand?userId="+getParamer('userId')
+    var data = {}
+
+    http_request( url , data , function(re){
+        var re = JSON.parse(re)
+        var base64Img = "data:image/png;base64,"+re.result
+        var imgHtml = '<img src="'+base64Img+'" >'
+        $(".imgCodebox").html(imgHtml)
     });
 
     changePboxStatus()
@@ -111,53 +70,23 @@ function getPhoneCode(){
     var phone   = $("input.phone").val()
     var imgRand = $("input.imgRand").val()
 
+    var url = "https://www.view-ol.com/viewol_web/fuser/getPhoneRand?userId="+getParamer('userId')+"&imgRand="+imgRand+"&phone="+phone
+    var data = {}
 
-    var header = {
-        "userId": getParamer('uid'),
-        "sessionId": getParamer('sessionId')
-    };
-    $.ajax({
-        type: "GET",
-        data: {},
-        contentType: "application/json",
-        url: "http://www.view-ol.com/viewol_web/fuser/getPhoneRand?userId="+getParamer('uid')+"&imgRand="+imgRand+"&phone="+phone,
-        beforeSend: function (xhr) {
-            if(header){
-                for(name in header){
-                    xhr.setRequestHeader(name, header[name]);
-                }
-            }
-        },
-        success: function (data) {
-            var re = JSON.parse(data)
-            if(re.status=="0000"){
-                //关闭弹窗
-                changePboxStatus()
-                //发送倒计时
-                setIntervalFun()
-            }else{
-                alert("获取短信验证码失败")
-            }
-           
-        },
+    http_request( url , data , function(re){
+        var re = JSON.parse(re)
+        if(re.status=="0000"){
+            //关闭弹窗
+            changePboxStatus()
+            //发送倒计时
+            setIntervalFun()
+        }else{
+            alert("获取短信验证码失败")
+        }
     });
 }
 
-//获取手机短信倒计时
-function setIntervalFun(){
-    var time = 60;
-    var loadwait = setInterval(function () {
-        time--;
-        if(time<=1){
-            clearInterval(loadwait);
-            $(".phonecodebutton").attr("onclick","getImgCode()");
-            $(".phonecodebutton").html("再次发送")
-        }else{
-            $(".phonecodebutton").attr("onclick","");
-            $(".phonecodebutton").html(time+"s")
-        }
-    },1000)
-}
+
 
 //提交用户信息
 function submitInfo(){
@@ -175,43 +104,29 @@ function submitInfo(){
         return false;
     }
 
-    var header = {
-        "userId": getParamer('uid'),
-        "sessionId": getParamer('sessionId')
-    };
-    $.ajax({
-        type: "POST",
-        data: {
+
+    var url = "https://www.view-ol.com/viewol_web/fuser/updateUser"
+    var data = {
             userName:nickname,
             rand:msgcode,
-            userId:getParamer('uid'),
+            userId:getParamer('userId'),
             phone:phone,
             company:company,
             // companyId:'',
             position:position,
             email:email,
             age:age
-        },
-        contentType: "application/x-www-form-urlencoded",
-        url: "http://www.view-ol.com/viewol_web/fuser/updateUser",
-        beforeSend: function (xhr) {
-            if(header){
-                for(name in header){
-                    xhr.setRequestHeader(name, header[name]);
-                }
-            }
-        },
-        success: function (data) {
-            var re = JSON.parse(data)
-            if(re.status=="0000"){
-                alert(re.message)
-                //跳转到后续页面
-                nav()
-            }else{
-                alert(re.message)
-            }
-           
-        },
+        }
+
+    http_request( url , data , function(re){
+        var re = JSON.parse(re)
+        if(re.status=="0000"){
+            alert(re.message)
+            //跳转到后续页面
+            nav()
+        }else{
+            alert(re.message)
+        }
     });
 }
 
@@ -229,15 +144,62 @@ function nav(){
 }
 
 
+
 function photo(){
-    wx.chooseImage({
-        count: 1, // 默认9
-        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-        success: function (res) {
-            var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+
+    // var url = "https://www.view-ol.com/viewol_web/wx/jsapiSignature?url=https://www.jk234.com/test/editUserInfo.html?userId="+getParamer('userId')+"&companyId="+getParamer('companyId')+"&bUserId="+getParamer('bUserId')+"&sessionId="+getParamer('sessionId')+"&action="+getParamer('action')
+    var url = "https://www.view-ol.com/viewol_web/wx/jsapiSignature"
+    var data = {}
+    http_request( url , data , function(re){
+        alert(re) 
+        var re = JSON.parse(re)
+        if(re.status=="0000"){
+            var rs = re.result
+            wx.config({
+                debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: rs.appId , // 必填，公众号的唯一标识
+                timestamp: rs.timestamp , // 必填，生成签名的时间戳
+                nonceStr: rs.nonceStr , // 必填，生成签名的随机串
+                signature: rs.signature ,// 必填，签名
+                jsApiList: ['chooseImage'] // 必填，需要使用的JS接口列表
+            });
+            wx.ready(function () {
+                //config校验成功，调用ready
+                    // alert("config校验成功")
+                    // wx.chooseImage({
+                    //     count: 1, // 默认9
+                    //     sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                    //     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                    //     success: function (res) {
+                    //         var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                    //     }
+                    // });
+
+                    wx.chooseImage({
+                        success: function (res) {
+                            wx.previewImage({
+                                current: res.localIds[0], // 当前显示图片的http链接
+                                urls: res.localIds// 需要预览的图片http链接列表
+                            })
+                        }
+                    });
+
+            });
+            wx.error(function (res) {
+                //config校验失败，调用error
+                jsonStr = JSON.stringify(res);
+                alert(jsonStr)
+            })
+        }else{
+            alert(re.message)
         }
     });
+
+    
+    // var config = $("#Config").val();
+    // config = JSON.parse(config);
+    // wx.config(config);
+    
 }
 
 </script>
@@ -275,6 +237,7 @@ align-items:center; /* 垂直居中 */text-align: center;padding-top:30px; }
 </style>
 
 <div class="outbox">
+    <div class="tsqy"></div>
     <div class="mainbox">
         <div class="pagetitle">个人信息录入/修改</div>
         
@@ -302,7 +265,7 @@ align-items:center; /* 垂直居中 */text-align: center;padding-top:30px; }
             </li>
             <li>
                 <div class="title">手机号码:</div>
-                <div class="input"><input type="text" value="" name="" class="phone"></div>
+                <div class="input"><input type="text" value="18616091704" name="" class="phone"></div>
             </li>
             <li>
                 <div class="title">短信验证码:</div>
@@ -340,5 +303,14 @@ align-items:center; /* 垂直居中 */text-align: center;padding-top:30px; }
     <div class="submit" onclick="submitInfo()">确定</div>
 </div>
 
+<script type="text/javascript">
+    $('input[type="text"],textarea').focus(function(){
+
+        window.setTimeout(function() {
+             document.activeElement.scrollIntoViewIfNeeded();
+         },0);
+    })
+
+</script>
 </body>
 </html>
