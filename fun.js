@@ -24,6 +24,32 @@ function http_request(  url , data , callback){
 
 }
 
+function http_request_post(  url , data , callback){
+    var header = {
+            "userId": getParamer('uid'),
+            "sessionId": getParamer('sessionId')
+        };
+
+    $.ajax({
+        type: "POST",
+        data: data,
+        contentType: "application/x-www-form-urlencoded",
+        url: url,
+        beforeSend: function (xhr) {
+            if(header){
+                for(name in header){
+                    xhr.setRequestHeader(name, header[name]);
+                }
+            }
+        },
+        success: function (data) {  
+            callback(data)
+            // return re
+        },
+    });
+
+}
+
 
 //解析url参数 start
 function getParamer(paramer){
