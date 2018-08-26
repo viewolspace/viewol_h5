@@ -9,29 +9,32 @@
     <script src="jquery-1.11.2.min.js"></script>
     <script src="fun.js?3"></script>
     <script>
-        var code = getParamer("code"); 
 
         function login() {
+            var code = getParamer("code"); 
             var url = "https://www.view-ol.com/viewol_web/wx/mpLogin?jscode="+code
             var data = {}
             http_request( url , data , function(re){
                 var re = JSON.parse(re)
                 if(re.status=="0000"){
                     //登录成功
+                    alert("登录成功")
+                    isPerfectnfo(re.result.sessionId , re.result.userId);
                 }else{
                     alert(re.message)
                 }
             });
         }
 
-        function isPerfectnfo(sessionId , userId){
+        function isPerfectnfo(sessionId="" , userId=""){
+            alert(sessionId+"|"+userId)
             var url = "https://www.view-ol.com/viewol_web/fuser/isPerfectnfo?userId="+userId
             var data = {}
             var header = {
                 "userId": userId,
                 "sessionId": sessionId
             }
-            http_request( url , data , header ,  function(re){
+            http_request2( url , data , header ,  function(re){
                 var re = JSON.parse(re)
                 if(re.status=="0000"){
                     //信息已完善
@@ -42,8 +45,6 @@
                 }
             });
         }
-
-        login()
         
     </script>
 </head>
@@ -61,7 +62,7 @@
 </style>
 
 <div class="outbox">
-    <div class="apply">我要参加</div>
+    <div class="apply" onclick="login()">我要参加</div>
 </div>
 
 </body>
