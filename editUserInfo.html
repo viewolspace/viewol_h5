@@ -184,6 +184,11 @@ function nav(){
     if( getParamer('action')==0 ){ //我的个人中心，修改个人信息
         wx.miniProgram.navigateTo({url: 'pages/my/index'})
     }
+
+    if(getParamer('action')==3){
+        //微信朋友圈报名流程
+        window.location.href="https://www.view-ol.com/mobile/welcome.html?userId="+getParamer('userId')+"&sessionId="+getParamer('sessionId')
+    }
     
 }
 
@@ -337,6 +342,7 @@ align-items:center; /* 垂直居中 */text-align: center;padding-top:30px; }
     #uploadForm{background: red; display: block; width: 300px; height: 66px; position: absolute; top: 79px; left: 19px;    overflow: hidden;opacity:0;z-index:9;cursor: pointer;}
     #uploadForm input{width: 300px; height: 80px; background: blue; position: absolute; left: 0; top: 0;}
     .loadingbox{position: fixed; top: 50%; left: 50%; width: 200px; height: 60px; line-height: 60px; text-align: center; background: #000; color: #fff; z-index: 999; border-radius: 6px; margin-left: -100px;font-size: 24px;display: none;}
+    .wzt{padding: 30px 0;}
 </style>
 
 <div class="loadingbox">请等待...</div>
@@ -384,9 +390,20 @@ align-items:center; /* 垂直居中 */text-align: center;padding-top:30px; }
                 <div class="title">邮箱:</div>
                 <div class="input"><input type="text" value="" name="" class="email"></div>
             </li>
-            <li></li>
         </ul>
+
+<!--         <div class="pagetitle wzt">问卷调查</div>
+
+        <ul class="list">
+            <li>
+                <div class="question">1、你了解国际安防展吗？</div>
+                <div class="answ"><input </div>
+            </li>
+        </ul> -->
     </div>
+
+
+
 
     <div class="cover">
         <div class="phonecode">

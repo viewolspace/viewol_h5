@@ -21,7 +21,26 @@ function http_request(  url , data , callback){
             // return re
         },
     });
+}
 
+function http_request2(  url , data , header , callback){
+    $.ajax({
+        type: "GET",
+        data: data,
+        contentType: "application/json",
+        url: url,
+        beforeSend: function (xhr) {
+            if(header){
+                for(name in header){
+                    xhr.setRequestHeader(name, header[name]);
+                }
+            }
+        },
+        success: function (data) {  
+            callback(data)
+            // return re
+        },
+    });
 }
 
 function http_request_post(  url , data , callback){
