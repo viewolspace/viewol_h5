@@ -162,7 +162,7 @@ function submitInfo(){
             var re = JSON.parse(data)
 
             if(re.status=="0000"){
-                alert(re.message)
+                // alert(re.message)
                 //跳转到后续页面
                 nav()
             }else{
@@ -187,6 +187,7 @@ function nav(){
 
     if(getParamer('action')==3){
         //微信朋友圈报名流程
+                                    // window.location.href="https://www.jk234.com/test/welcome.html?userId="+getParamer('userId')+"&sessionId="+getParamer('sessionId')
         window.location.href="https://www.view-ol.com/mobile/welcome.html?userId="+getParamer('userId')+"&sessionId="+getParamer('sessionId')
     }
     
@@ -434,43 +435,6 @@ align-items:center; /* 垂直居中 */text-align: center;padding-top:30px; }
              document.activeElement.scrollIntoViewIfNeeded();
          },0);
     })
-
-
-    // $('#upload').click(upload);
-    // $('#file').change(function(){
-    //             var reader = new FileReader();
-    //     reader.readAsDataURL($('#file')[0].files[0]);
-    //     reader.onload = function (e) {
-    //         $('#pre').attr('src', this.result)
-    //     }
-    // })
-    // function upload() {
-    //     alert("11")
-    //     var form = new FormData();
-    //     form.append("img", $('#file')[0].files[0]);
-    //     form.append("name", "jdlsajdlkas");
-    //     form.append("order", "1");
-
-    //     var settings = {
-    //         "async": true,
-    //         "crossDomain": true,
-    //         "url": "https://www.view-ol.com/viewol_web/scanCard/scanCard",
-    //         "method": "POST",
-    //         "processData": false,
-    //         "contentType": false,
-    //         "mimeType": "multipart/form-data",
-    //         "data": form
-    //     }
-
-    //     $.ajax(settings).done(function (response) {
-    //         console.log(response);
-    //         $(".pagetitle").html(response)
-    //         var re = JSON.parse(response)
-     
-    //         
-                
-    //     });
-    // }
 
 </script>
 </body>

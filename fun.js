@@ -40,6 +40,11 @@ function http_request2(  url , data , header , callback){
             callback(data)
             // return re
         },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {　
+            // alert(XMLHttpRequest.status);
+            // alert(XMLHttpRequest.readyState);
+            // alert(textStatus);
+        }
     });
 }
 
