@@ -18,7 +18,6 @@
                 var re = JSON.parse(re)
                 if(re.status=="0000"){
                     //登录成功
-                    alert("登录成功")
                     isPerfectnfo(re.result.sessionId , re.result.userId);
                 }else{
                     alert(re.message)
@@ -27,7 +26,7 @@
         }
 
         function isPerfectnfo(sessionId="" , userId=""){
-            alert(sessionId+"|"+userId)
+
             var url = "https://www.view-ol.com/viewol_web/fuser/isPerfectnfo?userId="+userId
             var data = {}
             var header = {
