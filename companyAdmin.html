@@ -8,12 +8,26 @@
     <script src="jweixin-1.3.2.js"></script>
     <script src="jquery-1.11.2.min.js"></script>
     <script src="fun.js?9"></script>
-     <script>
+    <script src="jquery.cookie.js"></script>
+    <!-- <script type="application/javascript" src="fastclick.js"></script>  -->
+    <script>
 
-        var globalDataLastId   
-        var globalAcDataLastId
-        var sessionId
-        var userId
+
+// if ('addEventListener' in document) {
+//     document.addEventListener('DOMContentLoaded', function() {
+//         FastClick.attach(document.body);
+//     }, false);
+// }
+
+        window.globalDataLastId  = ""
+        window.cardIsData  = "default"
+
+        window.globalAcDataLastId = ""
+        window.acIsData  = "default"
+
+        // window.userId = ""
+        // window.companyId = ""
+        // window.bUserStatus = ""
 
         function login() { 
             var code = getParamer("code"); 
@@ -21,204 +35,281 @@
             var url = "https://www.view-ol.com/viewol_web/wx/bUserLogin?jscode="+code+"&companyId="+companyId
             var data = {}
             http_request( url , data , function(re){
-                // alert(re)
                 var re = JSON.parse(re)
                 if(re.status=="0000"){
                     //登录成功
 
-                    $(".avata").attr("src",re.result.headImgUrl)
-                    $(".userinfo .name").html( re.result.company ? re.result.company : "" )
-                    $(".userinfo .adminname text").html("管理员："+re.result.userName ? re.result.userName : "" )
-                    $(".userinfo .tt text").html("职位："+re.result.position ? re.result.position : "")
-                    $(".userinfo .tel text").html("电话："+re.result.phone ? re.result.phone : "")
+                    var userName = re.result.userName ? re.result.userName : ""
+                    var position = re.result.position ? re.result.position : ""
+                    var phone    = re.result.phone ? re.result.phone : ""
+                    var companyName = re.result.companyName ? re.result.companyName : ""
+                    var companyLogo = re.result.companyLogo ? re.result.companyLogo : ""
+                    var author   = re.result.status
+                    var userId   = re.result.userId
+
+                    $.cookie('userId',      userId);
+                    $.cookie('companyId',   companyId);
+                    $.cookie('bUserStatus', author);
+                    $.cookie('companyLogo', companyLogo);
+                    $.cookie('companyName', companyName);
+                    $.cookie('userName',    userName);
+                    $.cookie('position',    position);
+                    $.cookie('phone',       phone);
 
 
+                    showInfo( companyLogo , companyName , userName, position , phone , companyId , userId )
 
-// getBusinessCardList(re.result.sessionId , re.result.userId);
-                                                getBusinessCardList("2018082620480216","16")
+                    getBusinessCardList();
                 }else{
-                    alert(re.message)
+                    if( $.cookie('userId') ){
+                        //已登录
+                        showInfo( $.cookie('companyLogo') , $.cookie('companyName') , $.cookie('userName'), $.cookie('position') , $.cookie('phone') , $.cookie('companyId') , $.cookie('userId') )
+                        getBusinessCardList();
+                        return false;
+                    }
                 }
             });
+        }
+
+
+        function showInfo( companyLogo , companyName , userName, position , phone , companyId , userId ){
+            $(".avata").attr("src",companyLogo)
+            $(".userinfo .name").html( companyName )
+            $(".userinfo .adminname  .val").html(userName)
+            $(".userinfo .tt .val").html(position)
+            $(".userinfo .tel .val").html(phone)
+            $(".userinfo .adminname input").val(userName)
+            $(".userinfo .tt input").val(position)
+            $(".userinfo .tel input").val(phone)
+            $(".applybutton a").attr("href","activitiesApply.html?companyId="+companyId+"&userId="+userId+"&companyName="+companyName)
         }
 
 
 
 
         function getBusinessCardList(){
-            alert("拉去名片列表")
-
-
             changeTab('mp')
 
-            //获取名片列表
-            var companyId   = getParamer('companyId')
-            var userId      = getParamer('userId')
-            var lastId      = globalDataLastId
+            if($.cookie('bUserStatus') !=1){
+                alert("无权限")
+                return false;
+            }
 
+            if(window.cardIsData==false){
+                return false;
+            }
+
+            $(".loadingbox").css({"display":"block"})
+
+            //获取名片列表
+            var companyId   = $.cookie('companyId')
+            var userId      = $.cookie('userId')
+            var lastId      = window.globalDataLastId
+            var url = "https://www.view-ol.com/viewol_web/ucard/ucardList"
+            var data = {
+                companyId:companyId,
+                userId:userId,
+                lastId:lastId,
+                pageSize:10
+            }
+            var header = {"userId": "","sessionId": ""}
+            http_request2( url , data , header ,  function(re){
+                $(".loadingbox").css({"display":"none"})
+                var re = JSON.parse(re)
+                if(re.result!=null){
+                    var rs   = re.result
+                    var html = "";
+                    for(var i=0 ; i<rs.length ; i++){
+                        var id = rs[i].id ? rs[i].id : ""
+                        var fUserName = rs[i].fUserName ? rs[i].fUserName : ""
+                        var fPosition = rs[i].fPosition ? rs[i].fPosition : ""
+                        var fPhone = rs[i].fPhone ? rs[i].fPhone : ""
+                        var fCompany = rs[i].fCompany ? rs[i].fCompany : ""
+                        html += '<div class="item" id="'+id+'"><img src="images/mp.jpg" alt="" class="icon"><div class="name">'+fUserName+'<text class="tt">职位：'+fPosition+'</text></div><div class="tel">电话：'+fPhone +'</div><div class="company">'+fCompany+'</div></div>'
+                    }
+                    $(".mpItemBox").append(html)
+                    $(".getMore").css({"display":'block'})
+                    window.globalDataLastId = rs[ rs.length-1 ].id
+                    window.cardIsData=true
+                }else{
+                    $(".getMore").css({"display":'none'})
+                    if( window.cardIsData=="default" ){
+                        var html = '<div class="none"><img src="images/nodata.jpg" alt="" class="none"><div>还没有人与您交换名片哦</div></div>'
+                        $(".mpItemBox").html(html)
+                    }
+                    if( window.cardIsData==true){
+                        window.cardIsData=false
+                        $(".mpItemBox").append("<div style='padding:20px;font-size:20px;color:#666;text-align:center;'>到底了..</div>")
+                    }
+                }
+            });
         }
 
 
 
+        function getActivitiesList(){
+            // alert("活动")
+            changeTab('ac')
 
-        // function getBusinessCardList(sessionId="" , userId=""){
-        //     //切换tab
-        //     changeTab('mp')
+            if($.cookie('bUserStatus') !=1){
+                alert("无权限")
+                return false;
+            }
 
-        //     //获取名片列表
-        //     var companyId   = getParamer('companyId')
-        //     var userId      = getParamer('userId')
-        //     var lastId      = globalDataLastId
+            $(".loadingbox").css({"display":"block"})
 
-        //     var header      = {
-        //         "userId": getParamer('userId'),
-        //         "sessionId": getParamer('sessionId')
-        //     };
-        //     $.ajax({
-        //         type: "GET",
-        //         data: {
-        //             companyId:companyId,
-        //             userId:userId,
-        //             lastId:lastId,
-        //             pageSize:10
-        //         },
-        //         contentType: "application/x-www-form-urlencoded",
-        //         url: "http://www.view-ol.com/viewol_web/ucard/ucardList",
-        //         beforeSend: function (xhr) {
-        //             if(header){
-        //                 for(name in header){
-        //                     xhr.setRequestHeader(name, header[name]);
-        //                 }
-        //             }
-        //         },
-        //         success: function (data) {
-        //             var re = JSON.parse(data)
-        //             console.log("===========获取名片列表===========")
-        //             console.log("userId:"+userId)
-        //             console.log("lastId:"+lastId)
-        //             console.log("companyId:"+companyId)
-        //             console.log(re)
-        //             console.log("===========end===========")
-        //             if(re.result!=null){
-        //                 var rs   = re.result
-        //                 var html = "";
-        //                 for(var i=0 ; i<rs.length ; i++){
-        //                     // html += '<div class="item"><div class="acname">'+rs[i].title+'</div><div class="time">'+rs[i].createTime +'</div><div class="button '+th+'">'+status+'</div></div>'
-        //                     html +- '<div class="item"><img src="images/mp.jpg" alt="" class="icon"><div class="name">'+rs[i].getfUserName  +'<text class="tt">职位：'+rs[i].getfPosition   +'</text></div><div class="tel">电话：'+rs[i].getfPhone +'</div><div class="company">缺少客户公司名</div></div>'
-        //                     console.log(html)
-        //                     // globalDataLastId = 
-        //                     $(".mpItemBox").append(html)
-        //                 }
-        //             }else{
-        //                 var html = '<div class="none"><img src="images/nodata.jpg" alt="" class="none"><div>还没有人与您交换名片哦</div></div>'
-        //                 $(".mpItemBox").html(html)
-        //             }
-        //         },
-        //     });
-        // }
+            //获取名片列表
+            var companyId   = $.cookie('companyId')
+            var userId      = $.cookie('userId')
+            var lastSeq     = window.globalAcDataLastId
+                                                // alert("sessionId"+sessionId+"|"+ "userId"+userId+"|"+ "companyId"+companyId)
+            var url = "https://www.view-ol.com/viewol_web/schedule/listSchedule/h5"
+            var data = {
+                lastSeq:lastSeq,
+                companyId:companyId,
+                num:100,
+            }
+            var header = {"userId": "","sessionId": ""}
+            http_request2( url , data , header ,  function(re){
+                $(".loadingbox").css({"display":"none"})
+                var re = JSON.parse(re)
+                if(re.result!=null){
 
-        // function getActivitiesList(){
-        //     //切换tab
-        //     changeTab('ac')
+                    var rs = re.result
+                    var html = "";
+                    for(var i=0 ; i<rs.length ; i++){
+                        
+                        switch (rs[i].status)
+                        {
+                            case -1:
+                                var status = "被打回" 
+                                var th     = "th"
+                                break;
+                            case 1:
+                                var status = "通过" 
+                                var th     = ""
+                                break;
+                            case 0:
+                                var status = "待审核" 
+                                var th     = ""
+                                break;
+                            default:
+                                var status = "解析错误" 
+                                var th     = ""
+                                break;
+                        }
+                        html += '<div class="item"><div class="acname">'+rs[i].title+'</div><div class="time">'+rs[i].createTime +'</div><div class="button '+th+'">'+status+'</div></div>'     
+                    }
+                    $(".acItemBox .acitembox2").append(html)
+                    window.globalAcDataLastId = rs[ rs.length-1 ].seq
+                    window.acIsData=true
+                }else{
+                    if( window.acIsData=="default" ){
+                        var html = '<div class="none"><img src="images/nodata.jpg" alt="" class="none"><div>您还没有申请活动哦</div></div>'
+                        $(".acItemBox .acitembox2").html(html)
+                    }
+                    if( window.acIsData==true){
+                        window.acIsData=false
+                        $(".acItemBox .acitembox2").append("<div style='padding:20px;font-size:20px;color:#666;text-align:center;'>到底了..</div>")
+                    }
+                }
 
-        //     //获取活动列表
-        //     var companyId   = getParamer('companyId')
-        //     var userId      = getParamer('userId')
-        //     var lastSeq     = globalAcDataLastId
-        //     var time        = ''
-        //     var date        = ''
+            });
+        }
 
-        //     var header      = {
-        //         "userId": getParamer('userId'),
-        //         "sessionId": getParamer('sessionId')
-        //     };
-        //     $.ajax({
-        //         type: "GET",
-        //         data: {
-        //             time:time,
-        //             date:date,
-        //             type:1,
-        //             keyword:'',
-        //             lastSeq:lastSeq,
-        //             companyId:companyId,
-        //             num:50,
-
-        //         },
-        //         contentType: "application/x-www-form-urlencoded",
-        //         url: "http://www.view-ol.com/viewol_web/schedule/listSchedule",
-        //         beforeSend: function (xhr) {
-        //             if(header){
-        //                 for(name in header){
-        //                     xhr.setRequestHeader(name, header[name]);
-        //                 }
-        //             }
-        //         },
-        //         success: function (data) {
-        //             var re = JSON.parse(data)
-        //             console.log("===========获取名片列表===========")
-        //             console.log("time:"+time)
-        //             console.log("date:"+date)
-        //             console.log("type:"+1)
-        //             console.log("keyword:")
-        //             console.log("lastSeq:"+lastSeq)
-        //             console.log("companyId:"+companyId)
-        //             console.log(re)
-        //             console.log("===========end===========")
-        //             if(re.result!=null){
-        //                 // alert(re.message)
-        //                 var rs = re.result
-        //                 var html = "";
-        //                 for(var i=0 ; i<rs.length ; i++){
-        //                     console.log(rs[i].status)
-        //                     switch (rs[i].status)
-        //                     {
-        //                         case -1:
-        //                             var status = "被打回" 
-        //                             var th     = "th"
-        //                             break;
-        //                         case 1:
-        //                             var status = "通过" 
-        //                             var th     = ""
-        //                             break;
-        //                         case 0:
-        //                             var status = "待审核" 
-        //                             var th     = ""
-        //                             break;
-        //                         default:
-        //                             var status = "解析错误" 
-        //                             var th     = ""
-        //                             break;
-        //                   }
-        //                     html += '<div class="item"><div class="acname">'+rs[i].title+'</div><div class="time">'+rs[i].createTime +'</div><div class="button '+th+'">'+status+'</div></div>'
-        //                     console.log(html)
-        //                     globalAcDataLastId
-        //                 }
-
-        //                 $(".acItemBox .acitembox2").html(html)
-        //                 //跳转到后续页面
-        //             }else{
-        //                 var html = '<div class="none"><img src="images/nodata.jpg" alt="" class="none"><div>您还没有申请活动哦</div></div>'
-        //                 $(".acItemBox .acitembox2").html(html)
-        //             }
-        //         },
-        //     });
-        // }
+   
 
         function changeTab(name){
             if( name =="mp"){
                 $(".tabbox .mp").addClass("on")
                 $(".tabbox .ac").removeClass("on")
                 $(".mpItemBox").css({"display":"block"})
+                $(".getMore").css({"display":'block'})
                 $(".acItemBox").css({"display":"none"})
+                $(".sx").css({"display":"none"})
             }else{
                 $(".tabbox .ac").addClass("on")
                 $(".tabbox .mp").removeClass("on")
                 $(".mpItemBox").css({"display":"none"})
+                $(".getMore").css({"display":'none'})
                 $(".acItemBox").css({"display":"block"})
+                $(".sx").css({"display":"block"})
             }
         }
 
 
+        function showEditBox(){
+            $(".header .showbox").css({"display":"none"})
+            $(".header .editbox").css({"display":"block"})
+        }
+
+        function editUserInfo(){
+            var adminName = $(".userinfo .adminname input").val()
+            var position = $(".userinfo .tt input").val()
+            var tel = $(".userinfo .tel input").val()
+
+            if( !adminName || !position || !tel ){
+                alert("不能为空")
+                return false;
+            }
+
+            if($.cookie('bUserStatus') !=1){
+                alert("无权限")
+                return false;
+            }
+
+            var url = "https://www.view-ol.com/viewol_web/buser/updateBuser"
+            var data = {
+                userId:$.cookie('userId'),
+                userName: adminName ,
+                position:position ,
+                phone:tel
+            }
+
+            var header = {
+                "userId": '',
+                "sessionId": ''
+            };
+
+            $.ajax({
+                type: "POST",
+                data: data,
+                contentType: "application/x-www-form-urlencoded",
+                url: url,
+                beforeSend: function (xhr) {
+                    if(header){
+                        for(name in header){
+                            xhr.setRequestHeader(name, header[name]);
+                        }
+                    }
+                },
+                success: function (data) {  
+                    var re = JSON.parse(data)
+
+                    if(re.status=="0000"){
+                        alert(re.message)
+                        $(".header .showbox").css({"display":"block"})
+                        $(".header .editbox").css({"display":"none"})
+
+                        var userName = re.result.userName
+                        var position = re.result.position
+                        var phone = re.result.phone
+                        $.cookie('userName',    userName);
+                        $.cookie('position',    position);
+                        $.cookie('phone',       phone);
+                        showInfo( $.cookie('companyLogo') , $.cookie('companyName') , userName, position , phone , $.cookie('companyId') , $.cookie('userId') )
+                    }else{
+                        alert(re.message)
+                    }
+
+                   nav()
+                },
+            });
+        }
+
+        $(".tabbox div").on("tap",function(){
+          alert("11111111111111")
+        });
 
         login()
     </script>
@@ -230,7 +321,7 @@
 </script>
 
 <style type="text/css">
-    /*body{background:#ff5a5e;}*/
+    body{background:#fff;}
     html,body,ul,li,p{padding:0;margin:0;}
     .outbox{width:640px; background:#fff;}
     .mainbox{padding:24px;font-size:22px;}
@@ -239,15 +330,18 @@
     .outbox .header .avata{width:96px;height:96px;border-radius:100px; border:3px #e0e0e0 solid;}
     .outbox .header .userinfo{position: absolute;width:430px;height:244px;top:30px;left:140px;}
     .outbox .header .userinfo .name{font-size:28px;font-weight:bold;padding-bottom:24px; }
-    .outbox .header .userinfo .other{font-size:24px;display: flex;  align-items:center; /* 垂直居中 */}
+    .outbox .header .userinfo .other{font-size:24px;display: flex;  align-items:center; /* 垂直居中 */height: 40px; line-height: 40px;}
     .outbox .header .userinfo .other text{display: block;width: 100px;}
-    .outbox .header .userinfo .other input{width: 210px;height: 40px;line-height:40px;border: 1px #3d3ab2 dotted;}
+    .outbox .header .userinfo .other text:nth-child(2){width: 270px;}
+    .outbox .header .userinfo .other input{width: 210px;height: 40px;line-height:40px;border: 1px #3d3ab2 dotted;font-size:22px;}
     .outbox .header .userinfo>div{padding-bottom:10px; }
     .outbox .header .editbutton{width:122px;height: 46px;border:1px #c8c3c1 solid;color:#3d3ab2;text-align: center;line-height:46px;position: absolute; right: 26px;display: flex;  justify-content:center; /* 水平居中 */  align-items:center; /* 垂直居中 */background:#fff;}
     .outbox .header .editbutton img{width: 22px;height:22px; margin-right:10px; }
 
+    .header .editbox{display: none;}
+
     .outbox .tabbox{height:70px;width:100%;display: flex;}
-    .outbox .tabbox>div{flex: 1;border-bottom:1px #e4e4e4 solid;height:69px;text-align: center; line-height: 70px; font-size: 22px;font-weight: bold;cursor:pointer;}
+    .outbox .tabbox>div{flex: 1;border-bottom:1px #e4e4e4 solid;height:69px;text-align: center; line-height: 70px; font-size: 22px;font-weight: bold;cursor:pointer;cursor: pointer;}
     .outbox .tabbox>div.on{border-bottom:3px #3d3ab2 solid;height:67px;color: #3d3ab2;}
 
 
@@ -260,16 +354,21 @@
     .mpItemBox .item .company{position: absolute; top: 76px; text-align: right; width: 100%;color:#76747b;}
     .none{text-align: center; padding-top: 80px;font-size:22px;}
 
-    .acItemBox{display: none;}
+    .acItemBox{display: none;padding-bottom: 90px;}
     .acItemBox .item{height:82px; margin:0 24px; border-bottom:2px   #3d3ab2 dotted;position: relative;font-size:24px;padding:26px 0;}
-    .acItemBox .acname{font-size:26px;font-weight:bold;padding-bottom:20px; }
+    .acItemBox .acname{font-size:23px;font-weight:bold;padding-bottom:20px; }
     .acItemBox .time{color:#797575;font-size:22px;}
-    .acItemBox .button{width:122px;height: 46px;border:1px #3d3ab2 dotted;color:#3d3ab2;text-align: center;line-height:46px;position: absolute; right: 26px;font-size:22px;top:44px;}
+    .acItemBox .button{width:122px;height: 46px;border:1px #3d3ab2 dotted;color:#3d3ab2;text-align: center;line-height:46px;position: absolute; right: 26px;font-size:22px;top:68px;}
     .acItemBox .button.th{width:122px;height: 46px;border:1px #ff6a6a dotted;color:#ff6a6a;text-align: center;line-height:46px;position: absolute; right: 26px;}
     .acItemBox .applybutton{height:100px;color: #3d3ab2;text-align: center;font-size:24px;line-height:100px;font-weight: bold;position: fixed;bottom:0;background:#fff;border-top:1px #eee solid;width:100%;}
     .acItemBox .applybutton a:link , .acItemBox .applybutton a:active , .acItemBox .applybutton a:visited{display: block;width:100%;height:100%;text-decoration: none;cursor: pointer;color: #3d3ab2;}
     
+
+    .loadingbox{position: fixed; top: 50%; left: 50%; width: 200px; height: 60px; line-height: 60px; text-align: center; background: #000; color: #fff; z-index: 999; border-radius: 6px; margin-left: -100px;font-size: 24px;display: none;}
+    .getMore{width: 300px; height: 70px; text-align: center; line-height: 70px; font-size: 22px; color: #8c8c8c; margin: auto;display: none;}
 </style>
+
+<div class="loadingbox">请等待...</div>
 
 <div class="outbox">
     <div class="header">
@@ -277,38 +376,36 @@
             <img src="" alt="" class="avata">
             <div class="userinfo">
                 <div class="name"> </div>
-                <div class="other adminname"><text>管理员：</text></div>
-                <div class="tt other"><text>职位：</text></div>
-                <div class="tel other"><text>电话：</text></div>
+                <div class="other adminname"><text>管理员：</text><text class="val"></text></div>
+                <div class="tt other"><text>职位：</text><text class="val"></text></div>
+                <div class="tel other"><text>电话：</text><text class="val"></text></div>
             </div>
 
-            <div class="editbutton">
+            <div class="editbutton" onclick="showEditBox()">
                 <img src="images/edit.jpg" alt="" class="icon">
                 修改
             </div>
         </div>
-<!-- 
+
         <div class="editbox">
-            <img src="http://www.ghost64.com/qqtupian/zixunImg/local/2018/01/17/15161775048939.jpg" alt="" class="avata">
+            <img src="" alt="" class="avata">
             <div class="userinfo">
-                <div class="name">浙江大华浙江大华浙江大华</div>
-                <div class="other">
-                    <text>管理员：</text>
-                    <input type="text" value="" maxlength="10"></div>
-                <div class="tt other"><text>职位：</text><input type="text" value="" maxlength="20"></div>
+                <div class="name"> </div>
+                <div class="other adminname"><text>管理员：</text><input type="text" value="" maxlength="10"></div>
+                <div class="tt other"><text>职位：</text><input type="text" value="" maxlength="10"></div>
                 <div class="tel other"><text>电话：</text><input type="text" value="" maxlength="11"></div>
             </div>
 
-            <div class="editbutton">
+            <div class="editbutton" onclick="editUserInfo()">
                 <img src="images/edit.jpg" alt="" class="icon">
-                修改
+                保存
             </div>
-        </div> -->
+        </div>
     </div>
     
     <div class="tabbox">
-        <div class="mp on" onclick="getBusinessCardList()">名片</div>
-        <div class="ac" onclick="getActivitiesList()">活动</div>
+        <div class="mp on" onclick="changeTab('mp');getBusinessCardList()">名片</div>
+        <div class="ac" onclick="changeTab('ac');getActivitiesList()">活动</div>
     </div>
 
     <div class="mpItemBox">
@@ -321,6 +418,8 @@
         </div> -->
 
     </div>
+    <div class="getMore" onclick="getBusinessCardList()">点击加载更多...</div>
+
     <div class="acItemBox">
         <div class="acitembox2">
         <!-- <div class="item">
@@ -336,7 +435,7 @@
         </div>
 
         <div class="applybutton">
-            <a href="activitiesApply.html?companyId=5&userId=4&companyName=优恒科技&email=1@q.com">
+            <a href="">
                 申请活动
             </a>
         </div>
