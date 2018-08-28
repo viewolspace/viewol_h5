@@ -75,7 +75,48 @@
         }
         login()
         
-                            // getCompanyInfo("2018082620480216","16")
+
+        function config(){
+            var xhr = new XMLHttpRequest();
+            xhr.open('get', 'https://www.view-ol.com/viewol_web/wx/jsapiSignature?url=' + encodeURIComponent(window.location.href.replace(window.location.hash, '')), true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log(xhr.readyState);
+                    var data = JSON.parse(xhr.responseText);
+                    if (data && data.status == '0000') {
+                        wx.config({
+                            appId: data.result.appId,
+                            timestamp: data.result.timestamp,
+                            nonceStr: data.result.nonceStr,
+                            signature: data.result.signature,
+                            jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage','chooseWXPay','chooseImage','getLocalImgData','downloadImage'],
+                            debug:false
+                        });
+                    }
+                }
+            };
+            xhr.send();
+
+            wx.ready(function () {
+                wx.onMenuShareAppMessage({
+                    title: 'XXX（公司）邀请您参加安博会', // 分享标题
+                    desc: '', // 分享描述
+                    link: 'http://baidu.com', // 分享链接
+                    imgUrl: '', // 分享图标
+                    type: '', // 分享类型,music、video或link，不填默认为link
+                    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                    success: function () {
+                        alert("分享成功")
+                        // 用户确认分享后执行的回调函数
+                    },
+                    cancel: function () {
+                        // 用户取消分享后执行的回调函数
+                    }
+                });
+            });
+        }
+
+        config()
     </script>
 </head>
 
