@@ -81,7 +81,11 @@
             $(".userinfo .adminname input").val(userName)
             $(".userinfo .tt input").val(position)
             $(".userinfo .tel input").val(phone)
-            $(".applybutton a").attr("href","activitiesApply.html?companyId="+companyId+"&userId="+userId+"&companyName="+companyName)
+            if($.cookie('bUserStatus') ==1){
+                $(".applybutton a").attr("href","activitiesApply.html?companyId="+companyId+"&userId="+userId+"&companyName="+companyName)
+            }else{
+                $(".applybutton").remove()
+            }
         }
 
 
