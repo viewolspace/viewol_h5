@@ -65,6 +65,7 @@
             $(".userinfo .adminname  .val").html(userName)
             $(".userinfo .tt .val").html(position)
             $(".userinfo .tel .val").html(phone)
+            $(".userinfo .tel .val").attr("href","tel:"+phone)
             $(".userinfo .adminname input").val(userName)
             $(".userinfo .tt input").val(position)
             $(".userinfo .tel input").val(phone)
@@ -114,7 +115,7 @@
                         var fPosition = rs[i].fPosition ? rs[i].fPosition : ""
                         var fPhone = rs[i].fPhone ? rs[i].fPhone : ""
                         var fCompany = rs[i].fCompany ? rs[i].fCompany : ""
-                        html += '<div class="item" id="'+id+'"><img src="images/mp.jpg" alt="" class="icon"><div class="name">'+fUserName+'<text class="tt">职位：'+fPosition+'</text></div><div class="tel">电话：'+fPhone +'</div><div class="company">'+fCompany+'</div></div>'
+                        html += '<div class="item" id="'+id+'"><img src="images/mp.jpg" alt="" class="icon"><div class="name">'+fUserName+'<text class="tt">职位：'+fPosition+'</text></div><div class="tel">电话：<text>'+fPhone +'</text></div><div class="company">'+fCompany+'</div><a class="phone" href="tel:'+fPhone+'"></a></div>'
                     }
                     $(".mpItemBox").append(html)
                     $(".getMore").css({"display":'block'})
@@ -296,9 +297,9 @@
             });
         }
 
-        $(".tabbox div").on("tap",function(){
-          alert("11111111111111")
-        });
+        // $(".tabbox div").on("tap",function(){
+        //   alert("11111111111111")
+        // });
 
         login()
     </script>
@@ -312,6 +313,7 @@
 <style type="text/css">
     body{background:#fff;}
     html,body,ul,li,p{padding:0;margin:0;}
+    a:link , a:hover , a:history , a:visited{color:#3d3ab2;}
     .outbox{width:640px; background:#fff;}
     .mainbox{padding:24px;font-size:22px;}
 
@@ -342,6 +344,8 @@
     .mpItemBox .item .tel{position: absolute; top: 76px; text-align: left; width: 100%;color:#76747b;}
     .mpItemBox .item .company{position: absolute; top: 76px; text-align: right; width: 100%;color:#76747b;}
     .none{text-align: center; padding-top: 80px;font-size:22px;}
+    .mpItemBox .item a.phone{display: block;/*background:red;border: 1px red solid;*/width:300px;height:60px;position: absolute;z-index:99;top:60px;}
+    .mpItemBox .item .tel text{text-decoration: underline;color:#3d3ab2;}
 
     .acItemBox{display: none;padding-bottom: 90px;}
     .acItemBox .item{height:82px; margin:0 24px; border-bottom:2px   #3d3ab2 dotted;position: relative;font-size:24px;padding:26px 0;}
@@ -367,7 +371,7 @@
                 <div class="name"> </div>
                 <div class="other adminname"><text>管理员：</text><text class="val"></text></div>
                 <div class="tt other"><text>职位：</text><text class="val"></text></div>
-                <div class="tel other"><text>电话：</text><text class="val"></text></div>
+                <div class="tel other"><text>电话：</text><text><a href="" class="val"></a></text></div>
             </div>
 
             <div class="editbutton" onclick="showEditBox()">
