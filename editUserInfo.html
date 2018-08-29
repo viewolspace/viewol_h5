@@ -121,6 +121,11 @@ function submitInfo(){
     var email      = $("input.email").val()
     console.log(age+" | "+company+" | "+position+" | "+phone+" | "+msgcode+" | "+email)
 
+    var companyId = -1;
+    if(getParamer('action')==3){
+        companyId = getParamer('companyId');
+    }
+
 
     if(!nickname || !age || !company || !position || !phone || !msgcode || !email){
         alert("请完善所有信息后提交")
@@ -135,7 +140,7 @@ function submitInfo(){
             userId:getParamer('userId'),
             phone:phone,
             company:company,
-            // companyId:'',
+            companyId:companyId,
             position:position,
             email:email,
             age:age

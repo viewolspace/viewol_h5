@@ -47,8 +47,9 @@
                     window.location.href="https://www.view-ol.com/mobile/welcome.html?userId="+userId+"&sessionId="+sessionId;
                                             // window.location.href="https://www.jk234.com/test/welcome.html?userId="+userId+"&sessionId="+sessionId;
                 }else{
+                    var companyId = getParamer("companyId");
                     //信息未完善
-                    window.location.href="https://www.view-ol.com/mobile/editUserInfo.html?userId="+userId+"&sessionId="+sessionId+"&action=3";
+                    window.location.href="https://www.view-ol.com/mobile/editUserInfo.html?userId="+userId+"&sessionId="+sessionId+"&action=3&companyId=" + companyId;
                                             // window.location.href="https://www.jk234.com/test/editUserInfo.html?userId="+userId+"&sessionId="+sessionId+"&action=3";
                 }
             });
