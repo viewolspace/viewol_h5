@@ -21,15 +21,20 @@
                 var re = JSON.parse(re)
                 if(re.status=="0000"){
                     //登录成功
-                    $(".apply").attr("onclick","isPerfectnfo('"+re.result.sessionId+"' , '"+re.result.userId+"')")
+                    $(".apply").attr("onclick","isPerfectnfo('"+re.result.sessionId+"' , '"+re.result.userId+"',1)");
+
                     getCompanyInfo(re.result.sessionId , re.result.userId);
+
+                    isPerfectnfo(re.result.sessionId , re.result.userId,0);
+
                 }else{
                     alert(re.message)
                 }
             });
         }
 
-        function isPerfectnfo(sessionId="" , userId=""){
+        //type == 0 如果没有完善不需要跳转    type==1没有完善需要跳转到完善页面
+        function isPerfectnfo(sessionId , userId ,type){
             var url = "https://www.view-ol.com/viewol_web/fuser/isPerfectnfo?userId="+userId
             var data = {}
             var header = {
@@ -43,19 +48,24 @@
                     return false;
                 }
                 if(re.status=="0000"){
-                    //信息已完善
-                    window.location.href="https://www.view-ol.com/mobile/welcome.html?userId="+userId+"&sessionId="+sessionId;
-                                            // window.location.href="https://www.jk234.com/test/welcome.html?userId="+userId+"&sessionId="+sessionId;
+                    if(type==1){
+                        //信息已完善
+                        window.location.href="https://www.view-ol.com/mobile/welcome.html?userId="+userId+"&sessionId="+sessionId;
+                    }else{
+                        $(".apply").html("查看我的邀请函");
+                    }
+
                 }else{
-                    var companyId = getParamer("companyId");
-                    //信息未完善
-                    window.location.href="https://www.view-ol.com/mobile/editUserInfo.html?userId="+userId+"&sessionId="+sessionId+"&action=3&companyId=" + companyId;
-                                            // window.location.href="https://www.jk234.com/test/editUserInfo.html?userId="+userId+"&sessionId="+sessionId+"&action=3";
+                    if(type==1){
+                        var companyId = getParamer("companyId");
+                        //信息未完善
+                        window.location.href="https://www.view-ol.com/mobile/editUserInfo.html?userId="+userId+"&sessionId="+sessionId+"&action=3&companyId=" + companyId;
+                    }
                 }
             });
         }
 
-        function getCompanyInfo(sessionId="" , userId=""){
+        function getCompanyInfo(sessionId , userId ){
             var companyId = getParamer("companyId"); 
                                                 // alert("sessionId"+sessionId+"|"+ "userId"+userId+"|"+ "companyId"+companyId)
             var url = "https://www.view-ol.com/viewol_web/company/getCompany?id="+companyId+"&userId="+userId 
