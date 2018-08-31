@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=640,target-densitydpi=device-dpi,user-scalable=no" />
+    <title>活动申请</title>   
+    <script src="jweixin-1.3.2.js"></script>
+    <script src="jquery-1.11.2.min.js"></script>
+    <script src="fun.js?3"></script>
+    <script>
+        var companyId = getParamer("companyId")
+        var url = "https://www.view-ol.com/mobile/invitation.html?companyId="+companyId;
+        // var url = "https://www.jk234.com/test/invitation.html?companyId="+companyId;
+        window.location.href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx7a9dfdd0e5f4c671&redirect_uri="+url+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+    </script>
+</head>
+
+<body>
+</body>
+</html>
