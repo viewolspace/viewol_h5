@@ -40,7 +40,6 @@
      */
     var Mapael = function (container, options) {
         var self = this;
-		console.log(options);
         // the global container (DOM element object)
         self.container = container;
 

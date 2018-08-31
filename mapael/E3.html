@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Map with SVG paths defined through the legend to plot some cities</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>E3场馆图</title>
+
+    <style>
+        /*@media screen and (orientation: portrait) {*/
+        /*.map {*/
+        /*-webkit-transform:rotate(90deg);*/
+        /*-moz-transform: rotate(90deg);*/
+        /*-ms-transform: rotate(90deg);*/
+        /*transform: rotate(90deg);*/
+        /*width: 100vh;*/
+        /*height: 100vh;*/
+        /*overflow: hidden;*/
+        /*}*/
+
+        /*}*/
+        /*@media screen and (orientation: landscape) {*/
+        /*.map {*/
+        /*-webkit-transform:rotate(0);*/
+        /*-moz-transform: rotate(0);*/
+        /*-ms-transform: rotate(0);*/
+        /*transform: rotate(0)*/
+        /*}*/
+        /*}*/
+    </style>
+
     <style type="text/css">
         body {
-            color: #5d5d5d;
+            color: #ED8019;
             font-family: PingFang SC Light, Lantinghei SC Light, Helvetica Neue Light, Helvetica Light, DroidSans, Roboto Light, Arial Light, Microsoft YaHei Light, \\5FAE\8F6F\96C5\9ED1, STHeitiSC-Light, simsun, \\5B8B\4F53, WenQuanYi Zen Hei Light, WenQuanYi Micro Hei Light, Noto SansCJK Light, "sans-serif";
 
         }
@@ -17,7 +42,6 @@
         }
 
         .container {
-            max-width: 800px;
             margin: auto;
         }
 
@@ -40,7 +64,7 @@
             border-radius: 10px;
             padding: 10px;
             z-index: 1000;
-            max-width: 200px;
+            /*max-width: 200px;*/
             display: none;
             color: #fff;
         }
@@ -86,8 +110,8 @@
     </style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"
-            charset="utf-8"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.3.0.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js" charset="utf-8"></script>
     <script src="js/jquery.mapael.js" charset="utf-8"></script>
     <script src="js/maps/E3.js" charset="utf-8"></script>
@@ -102,7 +126,7 @@
             }
 
             var companyId = getQueryString("companyId");//当前查看的公司
-            var recommendIds = getQueryString("recommendIds");//推荐公司,调接口查询
+            var recommendIds = [422,623,274];//推荐公司,调接口查询
 
             var areas = {};
             var area = {};
@@ -113,6 +137,17 @@
 
             areas[companyId] = area;
 
+            //推荐展商
+            for(var i=0;i<recommendIds.length;i++){
+                var area = {};
+                area.attrs = {
+                    fill: "#00e100",
+                    stroke: "#2D2D2D"
+                };
+
+                areas[recommendIds[i]] = area;
+            }
+
             $(".mapcontainer").mapael({
                 map: {
                     name: "E3"
@@ -122,15 +157,16 @@
                     }
                     , defaultArea: {
                         attrs: {
-                            fill: "#f4f4e8", stroke: "#ced8d0"
+                            fill: "#ED7F18", stroke: "#000"
                         }
                         , attrsHover: {
-                            fill: "#a4e100"
+                            fill: "red"
                         },
                         eventHandlers: {
                             click: function (e, id, mapElem, textElem) {
-                                //alert(id);
-                                window.location.href = "http://www.baidu.com";
+                                // alert(id);
+                                wx.miniProgram.navigateTo({url: '/pages/company/index?id=905'})
+
                             }
                         }
                     },
@@ -141,17 +177,23 @@
                 areas: areas
             });
         });
+
+
     </script>
 
 </head>
 
 <body>
-<div class="container">
-    <div class="mapcontainer">
-        <div class="map">
-            <span>Alternative content for the map</span>
-        </div>
+<!--<div class="container main">-->
+<!---->
+
+<!--</div>-->
+
+<div class="mapcontainer">
+    <div class="map">
+
     </div>
 </div>
+
 </body>
 </html>
