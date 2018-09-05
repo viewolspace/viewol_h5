@@ -55,6 +55,7 @@
                         return false;
                     }
                 }
+
             });
         }
 
@@ -90,6 +91,8 @@
             }
 
             $(".loadingbox").css({"display":"block"})
+
+            getCompanyMaErCode()
 
             //获取名片列表
             var companyId   = $.cookie('companyId')
@@ -297,9 +300,54 @@
             });
         }
 
-        // $(".tabbox div").on("tap",function(){
-        //   alert("11111111111111")
-        // });
+
+        //获取小程序码
+        function getCompanyMaErCode(){
+            if($.cookie('bUserStatus') !=1){
+                alert("无权限")
+                return false;
+            }
+
+            var url = "https://www.view-ol.com/viewol_web/company/getCompanyMaErCode"
+            var data = {
+                type:"-1",
+                bUserId:$.cookie('userId'),
+                companyId: $.cookie('companyId'),
+                width:430 ,
+            }
+
+            var header = {
+                "userId": '',
+                "sessionId": ''
+            };
+
+            $.ajax({
+                type: "POST",
+                data: data,
+                contentType: "application/x-www-form-urlencoded",
+                url: url,
+                beforeSend: function (xhr) {
+                    if(header){
+                        for(name in header){
+                            xhr.setRequestHeader(name, header[name]);
+                        }
+                    }
+                },
+                success: function (data) {  
+                    var re = JSON.parse(data)
+                    var html = '<img src="data:image/png;base64,'+re.ercode+'"/>'
+                    $(".qrbox").html(html);
+                },
+            });
+        }
+
+        function showQr(){
+            if( $(".qrbox").css("display") == "none" ){
+                $(".qrbox").css({"display":"block"})
+            }else{
+                $(".qrbox").css({"display":"none"})
+            }
+        }
 
         login()
     </script>
@@ -326,8 +374,9 @@
     .outbox .header .userinfo .other text:nth-child(2){width: 270px;}
     .outbox .header .userinfo .other input{width: 210px;height: 40px;line-height:40px;border: 1px #3d3ab2 dotted;font-size:22px;}
     .outbox .header .userinfo>div{padding-bottom:10px; }
-    .outbox .header .editbutton{width:122px;height: 46px;border:1px #c8c3c1 solid;color:#3d3ab2;text-align: center;line-height:46px;position: absolute; right: 26px;display: flex;  justify-content:center; /* 水平居中 */  align-items:center; /* 垂直居中 */background:#fff;}
+    .outbox .header .editbutton{width:122px;height: 46px;border:1px #c8c3c1 solid;color:#3d3ab2;text-align: center;line-height:46px;position: absolute; right: 26px;display: flex;  justify-content:center; /* 水平居中 */  align-items:center; /* 垂直居中 */background:#fff; top: 110px;}
     .outbox .header .editbutton img{width: 22px;height:22px; margin-right:10px; }
+    .outbox .header .showqr{width:122px;height: 46px;border:1px #c8c3c1 solid;color:#3d3ab2;text-align: center;line-height:46px;position: absolute; right: 26px;display: flex;  justify-content:center; /* 水平居中 */  align-items:center; /* 垂直居中 */background:#fff; top: 170px;}
 
     .header .editbox{display: none;}
 
@@ -359,9 +408,14 @@
 
     .loadingbox{position: fixed; top: 50%; left: 50%; width: 200px; height: 60px; line-height: 60px; text-align: center; background: #000; color: #fff; z-index: 999; border-radius: 6px; margin-left: -100px;font-size: 24px;display: none;}
     .getMore{width: 300px; height: 70px; text-align: center; line-height: 70px; font-size: 22px; color: #8c8c8c; margin: auto;display: none;}
+
+    .qrbox{width:100vw;height: 100vh;position: fixed;top:0;left:0;z-index:999999;background:#333;opacity:0.9;display: flex;  justify-content:center; /* 水平居中 */  align-items:center; /* 垂直居中 */display: none;}
+    .qrbox img{opacity:1;position:absolute;width:400px;height:400px;top:50%;left: 50%;margin-top:-200px;margin-left:-200px;  }
 </style>
 
 <div class="loadingbox">请等待...</div>
+
+<div class="qrbox" onclick="showQr()"></div>
 
 <div class="outbox">
     <div class="header">
@@ -378,6 +432,10 @@
             <div class="editbutton" onclick="showEditBox()">
                 <img src="images/edit.jpg" alt="" class="icon">
                 修改
+            </div>
+
+            <div class="showqr" onclick="showQr()">
+                我的二维码
             </div>
         </div>
 
