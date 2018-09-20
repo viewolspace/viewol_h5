@@ -11,11 +11,8 @@
       <change beforePath="$PROJECT_DIR$/mapael/W2.html" beforeDir="false" afterPath="$PROJECT_DIR$/mapael/W2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mapael/W3.html" beforeDir="false" afterPath="$PROJECT_DIR$/mapael/W3.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mapael/W4.html" beforeDir="false" afterPath="$PROJECT_DIR$/mapael/W4.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapael/js/jquery.mapael.js" beforeDir="false" afterPath="$PROJECT_DIR$/mapael/js/jquery.mapael.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mapael/js/maps/E1.js" beforeDir="false" afterPath="$PROJECT_DIR$/mapael/js/maps/E1.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mapael/js/maps/E2.js" beforeDir="false" afterPath="$PROJECT_DIR$/mapael/js/maps/E2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapael/js/maps/E3.js" beforeDir="false" afterPath="$PROJECT_DIR$/mapael/js/maps/E3.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapael/js/maps/E4.js" beforeDir="false" afterPath="$PROJECT_DIR$/mapael/js/maps/E4.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mapael/js/maps/W1.js" beforeDir="false" afterPath="$PROJECT_DIR$/mapael/js/maps/W1.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mapael/js/maps/W2.js" beforeDir="false" afterPath="$PROJECT_DIR$/mapael/js/maps/W2.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mapael/js/maps/W3.js" beforeDir="false" afterPath="$PROJECT_DIR$/mapael/js/maps/W3.js" afterDir="false" />
@@ -36,34 +33,38 @@
     <session id="1684313025">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="5" />
+          <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.42" value="1" />
+          <entry key="project.open.time.50" value="1" />
+          <entry key="project.open.time.54" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="html" value="28" />
-          <entry key="js" value="28" />
+          <entry key="html" value="35" />
+          <entry key="js" value="37" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="28" />
-          <entry key="JavaScript" value="28" />
+          <entry key="HTML" value="35" />
+          <entry key="JavaScript" value="37" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="392" />
-          <entry key="js" value="51" />
+          <entry key="html" value="519" />
+          <entry key="js" value="55" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="392" />
-          <entry key="JavaScript" value="51" />
+          <entry key="HTML" value="519" />
+          <entry key="JavaScript" value="55" />
         </counts>
       </usages-collector>
     </session>
@@ -74,73 +75,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mapael/E1.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4150">
-              <caret line="166" column="40" selection-start-line="166" selection-start-column="35" selection-end-line="166" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/mapael/E2.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="162" column="19" lean-forward="true" selection-start-line="162" selection-start-column="19" selection-end-line="162" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mapael/E3.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="167" column="66" selection-start-line="167" selection-start-column="66" selection-end-line="167" selection-end-column="66" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mapael/E4.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="167" column="66" selection-start-line="167" selection-start-column="66" selection-end-line="167" selection-end-column="66" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mapael/W1.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="167" column="66" selection-start-line="167" selection-start-column="66" selection-end-line="167" selection-end-column="66" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mapael/W2.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="167" column="66" selection-start-line="167" selection-start-column="66" selection-end-line="167" selection-end-column="66" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mapael/W3.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="167" column="66" selection-start-line="167" selection-start-column="66" selection-end-line="167" selection-end-column="66" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mapael/W4.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="169" column="29" lean-forward="true" selection-start-line="169" selection-start-column="29" selection-end-line="169" selection-end-column="29" />
+            <state relative-caret-position="373">
+              <caret line="286" column="17" lean-forward="true" selection-start-line="176" selection-start-column="16" selection-end-line="286" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -148,8 +86,62 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mapael/js/maps/W3.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="30" column="18" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
+            <state relative-caret-position="281">
+              <caret line="304" column="72" lean-forward="true" selection-start-line="304" selection-start-column="72" selection-end-line="304" selection-end-column="72" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/mapael/W3.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="600">
+              <caret line="160" column="34" selection-start-line="160" selection-start-column="34" selection-end-line="160" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mapael/W4.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="275">
+              <caret line="160" column="42" selection-start-line="160" selection-start-column="42" selection-end-line="160" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mapael/js/maps/E1.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="34" column="15" selection-start-line="34" selection-start-column="15" selection-end-line="34" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mapael/E1.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="298">
+              <caret line="182" column="42" selection-start-line="182" selection-start-column="42" selection-end-line="182" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mapael/E2.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="250">
+              <caret line="179" column="42" selection-start-line="179" selection-start-column="35" selection-end-line="179" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mapael/js/maps/E2.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="163">
+              <caret line="55" column="65" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="65" />
             </state>
           </provider>
         </entry>
@@ -157,8 +149,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/mapael/js/maps/W4.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="30" column="18" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
+            <state relative-caret-position="248">
+              <caret line="42" column="22" lean-forward="true" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mapael/js/maps/W1.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="42" column="22" lean-forward="true" selection-start-line="33" selection-start-column="20" selection-end-line="42" selection-end-column="22" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -174,27 +178,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>alert</find>
-      <find>M6532</find>
-      <find>PATH-462</find>
-      <find>PATH-422</find>
-      <find>PATH-274</find>
-      <find>mapcontainer</find>
-      <find>map</find>
-      <find>mapael</find>
-      <find>container</find>
-      <find>main</find>
-      <find>M6537</find>
-      <find>M332.4</find>
-      <find>M332.2,345.9C</find>
-      <find>M1106</find>
-      <find>M1402</find>
-      <find>1066</find>
-      <find>M1112</find>
-      <find>1106</find>
-      <find>console</find>
-      <find>M332.</find>
-      <find>E1</find>
+      <find>M7.2,175.9v-12.2h12.2v12.2H7.2z</find>
+      <find>M7.2,211.2v-23.9h12.2v23.9H7.2z</find>
+      <find>M19.1,302.3V314H7.4v-11.8H19.1</find>
+      <find>M19.1,325.9v11.8H7.4v-11.8H19.1</find>
+      <find>M19.1,337.6v11.8H7.4v-11.8H19.1</find>
+      <find>M220.2,309.2v-23.4h12.2v23.4H220.2z</find>
+      <find>M243.8,321.5v-12.2h12.2v12.2H243.8z</find>
+      <find>M243.8,333.2v-12.2h12.2v12.2H243.8z</find>
+      <find>M271.5,327V303h12.2V327H271.5z</find>
+      <find>M7.2,457.2v-12.1h12.2v12.1H7.2z</find>
+      <find>M7.2,468.9v-12.1h12.2v12.1H7.2z</find>
+      <find>M7.2,492.5v-23.9h12.2v23.9H7.2z</find>
+      <find>M271.5,468.9v-23.9h12.2v23.9H271.5z</find>
+      <find>M288,515.5v-12.2h23.9v12.2H288z</find>
+      <find>M430.7,503.5v11.8h-23.5v-11.8H430.7</find>
+      <find>M204.7,552.6v23.5h-47v-23.5H204.7</find>
+      <find>M395.2,581.8v-47.5h35.7v47.5H395.2z</find>
+      <find>M395.4,534.5V558h-23.6v-23.5H395.4</find>
+      <find>M371.6,581.8v-23.9h24v23.9H371.6z</find>
+      <find>M430.7,595.3v35.2h-23.5v-35.2H430.</find>
+      <find>M7.2,601.2v-12.2h12.2v12.2H7.2z</find>
+      <find>M7.2,624.8v-12.2h12.2v12.2H7.2z</find>
+      <find>M7.2,648.3v-12.2h12.2v12.2H7.2z</find>
+      <find>M44.9,149.2V78.5h35.6v70.7H44.9z</find>
+      <find>M95.7,160.9V78.5h47.3v82.4H95.7z</find>
+      <find>M166.1,149.2V78.5h47.3v70.7H166.1z</find>
+      <find>M95.7,245v-70.7h47.3V245H95.7z</find>
+      <find>M433.5,655.4l-63.5,0l-0.1,4.1l-9.7-6.1</find>
+      <find>M324.9,544.8v11.7H313v-11.7H324.9</find>
+      <find>M213.2,258.5v70.3h-46.9v-70.3H213.2</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -207,22 +220,22 @@
         <option value="$PROJECT_DIR$/invitation.html" />
         <option value="$PROJECT_DIR$/mapael/test.html" />
         <option value="$PROJECT_DIR$/mapael/js/jquery.mapael.js" />
-        <option value="$PROJECT_DIR$/mapael/js/maps/E1.js" />
-        <option value="$PROJECT_DIR$/mapael/js/maps/E2.js" />
         <option value="$PROJECT_DIR$/mapael/js/maps/E3.js" />
         <option value="$PROJECT_DIR$/mapael/js/maps/E4.js" />
-        <option value="$PROJECT_DIR$/mapael/js/maps/W1.js" />
-        <option value="$PROJECT_DIR$/mapael/js/maps/W2.js" />
-        <option value="$PROJECT_DIR$/mapael/js/maps/W3.js" />
-        <option value="$PROJECT_DIR$/mapael/js/maps/W4.js" />
-        <option value="$PROJECT_DIR$/mapael/E1.html" />
-        <option value="$PROJECT_DIR$/mapael/E2.html" />
         <option value="$PROJECT_DIR$/mapael/E3.html" />
         <option value="$PROJECT_DIR$/mapael/E4.html" />
         <option value="$PROJECT_DIR$/mapael/W1.html" />
+        <option value="$PROJECT_DIR$/mapael/js/maps/W1.js" />
+        <option value="$PROJECT_DIR$/mapael/js/maps/W2.js" />
         <option value="$PROJECT_DIR$/mapael/W2.html" />
-        <option value="$PROJECT_DIR$/mapael/W3.html" />
+        <option value="$PROJECT_DIR$/mapael/js/maps/W4.js" />
+        <option value="$PROJECT_DIR$/mapael/js/maps/E1.js" />
+        <option value="$PROJECT_DIR$/mapael/js/maps/E2.js" />
+        <option value="$PROJECT_DIR$/mapael/js/maps/W3.js" />
+        <option value="$PROJECT_DIR$/mapael/E2.html" />
+        <option value="$PROJECT_DIR$/mapael/E1.html" />
         <option value="$PROJECT_DIR$/mapael/W4.html" />
+        <option value="$PROJECT_DIR$/mapael/W3.html" />
       </list>
     </option>
   </component>
@@ -233,9 +246,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="width" value="1383" />
-    <option name="height" value="744" />
+    <option name="x" value="136" />
+    <option name="y" value="190" />
+    <option name="width" value="1382" />
+    <option name="height" value="784" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -261,7 +275,7 @@
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js-jscs-nodeInterpreter" value="D:\soft_1\nodejs\node.exe" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="D:/quicksurveyspace/question-invest" />
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
@@ -318,22 +332,25 @@
       <option name="presentableId" value="Default" />
       <updated>1535438534036</updated>
       <workItem from="1535681917784" duration="1072000" />
-      <workItem from="1535687564245" duration="15630000" />
+      <workItem from="1535687564245" duration="16273000" />
+      <workItem from="1535855043459" duration="2257000" />
+      <workItem from="1535985143366" duration="52000" />
+      <workItem from="1537340484135" duration="3087000" />
+      <workItem from="1537405868987" duration="6628000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16702000" />
+    <option name="totallyTimeSpent" value="29369000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info id="Favorites" order="0" sideWeight="0.5008518" side_tool="true" weight="0.24962631" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49914822" visible="true" weight="0.24924925" />
-      <window_info id="Structure" order="2" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49406177" visible="true" weight="0.25" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Favorites" order="2" sideWeight="0.50593823" side_tool="true" weight="0.24887893" />
       <window_info anchor="bottom" id="Event Log" order="0" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="1" />
+      <window_info anchor="bottom" id="Version Control" order="1" weight="0.32854864" />
       <window_info anchor="bottom" id="Terminal" order="2" />
       <window_info anchor="bottom" id="Message" order="3" />
       <window_info anchor="bottom" id="Find" order="4" />
@@ -353,6 +370,18 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/mapael/W4.html</url>
+          <line>193</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/invitation_index.html">
@@ -397,34 +426,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mapael/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1200">
-          <caret line="96" column="86" selection-start-line="96" selection-start-column="74" selection-end-line="96" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/mapael/test.html" />
     <entry file="file://$PROJECT_DIR$/mapael/js/jquery.mapael.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
           <caret line="41" column="24" selection-start-line="41" selection-start-column="24" selection-end-line="41" selection-end-column="24" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mapael/js/maps/E1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="33" lean-forward="true" selection-end-line="4541" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mapael/js/maps/E2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="30" column="18" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -442,87 +448,111 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mapael/js/maps/W1.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mapael/js/maps/W2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="30" column="18" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mapael/js/maps/W3.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="30" column="18" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mapael/js/maps/W4.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="30" column="18" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mapael/E3.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="167" column="66" selection-start-line="167" selection-start-column="66" selection-end-line="167" selection-end-column="66" />
+        <state relative-caret-position="3200">
+          <caret line="128" column="29" selection-start-line="128" selection-start-column="29" selection-end-line="128" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mapael/E4.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="167" column="66" selection-start-line="167" selection-start-column="66" selection-end-line="167" selection-end-column="66" />
+        <state relative-caret-position="3200">
+          <caret line="128" column="29" selection-start-line="128" selection-start-column="29" selection-end-line="128" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mapael/W1.html">
+    <entry file="file://$PROJECT_DIR$/companyAdmin_index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="167" column="66" selection-start-line="167" selection-start-column="66" selection-end-line="167" selection-end-column="66" />
+        <state relative-caret-position="300">
+          <caret line="12" column="67" selection-start-line="12" selection-start-column="63" selection-end-line="12" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mapael/js/maps/W2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5270">
+          <caret line="29" column="19" lean-forward="true" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mapael/W2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="167" column="66" selection-start-line="167" selection-start-column="66" selection-end-line="167" selection-end-column="66" />
+        <state relative-caret-position="523">
+          <caret line="171" column="22" lean-forward="true" selection-start-line="158" selection-start-column="20" selection-end-line="171" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mapael/W4.html">
+    <entry file="file://$PROJECT_DIR$/mapael/js/maps/W1.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="169" column="29" lean-forward="true" selection-start-line="169" selection-start-column="29" selection-end-line="169" selection-end-column="29" />
+        <state relative-caret-position="324">
+          <caret line="42" column="22" lean-forward="true" selection-start-line="33" selection-start-column="20" selection-end-line="42" selection-end-column="22" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mapael/W3.html">
+    <entry file="file://$PROJECT_DIR$/mapael/js/maps/W4.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="167" column="66" selection-start-line="167" selection-start-column="66" selection-end-line="167" selection-end-column="66" />
+        <state relative-caret-position="248">
+          <caret line="42" column="22" lean-forward="true" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mapael/E1.html">
+    <entry file="file://$PROJECT_DIR$/mapael/js/maps/E1.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4150">
-          <caret line="166" column="40" selection-start-line="166" selection-start-column="35" selection-end-line="166" selection-end-column="40" />
+        <state relative-caret-position="126">
+          <caret line="34" column="15" selection-start-line="34" selection-start-column="15" selection-end-line="34" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mapael/W1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="286" column="17" lean-forward="true" selection-start-line="176" selection-start-column="16" selection-end-line="286" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mapael/js/maps/W3.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="304" column="72" lean-forward="true" selection-start-line="304" selection-start-column="72" selection-end-line="304" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mapael/js/maps/E2.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="55" column="65" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="65" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mapael/E2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="162" column="19" lean-forward="true" selection-start-line="162" selection-start-column="19" selection-end-line="162" selection-end-column="19" />
+        <state relative-caret-position="250">
+          <caret line="179" column="42" selection-start-line="179" selection-start-column="35" selection-end-line="179" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mapael/E1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="182" column="42" selection-start-line="182" selection-start-column="42" selection-end-line="182" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mapael/W4.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="160" column="42" selection-start-line="160" selection-start-column="42" selection-end-line="160" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mapael/W3.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="160" column="34" selection-start-line="160" selection-start-column="34" selection-end-line="160" selection-end-column="34" />
         </state>
       </provider>
     </entry>
