@@ -115,7 +115,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js" charset="utf-8"></script>
     <script src="js/jquery.mapael.js" charset="utf-8"></script>
     <script src="js/maps/E2.js" charset="utf-8"></script>
-
+    <script src="js/maps/E2_mapping.js" charset="utf-8"></script>
     <script type="text/javascript">
         $(function () {
             function getQueryString(name) {
@@ -126,10 +126,77 @@
             }
 
             var companyId = getQueryString("companyId");//当前查看的公司
-            companyId = 1066;
+            if(companyId && map_2[companyId]){
+                companyId = map_2[companyId].split(",")[0];
+            }
             var recommendIds = [422,623,274];//推荐公司,调接口查询
 
-            var areas = {};
+            var areas = {
+                "1": {
+                    attrs: {
+                        fill: "#85C8A1"
+                    },
+                    attrsHover: {
+                        fill: "#85C8A1"
+                    }
+                },
+                "3": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "5": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "7": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "9": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "11": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "12": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "14": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "16": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "18": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "20": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "22": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "24": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "26": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "28": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "30": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "32": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "34": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "36": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "38": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "40": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "42": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "44": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "46": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "48": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "50": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "52": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "54": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "56": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "58": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "60": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "62": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "64": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "66": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "68": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "70": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "72": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "74": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "76": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "78": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "80": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "82": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "84": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "86": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "88": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "90": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "92": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "94": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "96": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "98": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "100": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "102": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "104": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "106": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "108": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "110": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
+                "112": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}}
+            };
             var area = {};
             area.attrs = {
                 fill: "#a4e100",
@@ -166,7 +233,12 @@
                         },
                         eventHandlers: {
                             click: function (e, id, mapElem, textElem) {
-                                wx.miniProgram.navigateTo({url: '/pages/company/index?id=905'})
+                                if(map_1[id]){
+                                    alert(map_1[id]);
+//                                    wx.miniProgram.navigateTo({url: '/pages/company/index?id='+map_1[id]})
+                                }else{
+                                    alert(id);
+                                }
                             }
                         }
                     },
@@ -174,72 +246,7 @@
                         //paper.path("M9670 5630 l0 -240 365 0 365 0 0 240 0 240 -365 0 -365 0 0 -240z m275 58 c5 -22 10 -27 16 -17 4 8 3 19 -4 28 -10 12 -8 13 15 8 15 -4 30 -3 33 3 5 8 11 8 20 0 10 -8 14 -8 17 1 6 19 38 3 38 -19 0 -13 8 -18 33 -19 30 -2 30 -1 10 9 -25 12 -32 31 -8 22 8 -4 15 -1 15 5 0 6 9 11 20 11 11 0 20 -7 20 -15 0 -18 1 -18 34 -5 32 12 34 -3 4 -18 l-23 -12 25 1 c42 2 46 -1 20 -16 l-25 -14 23 -1 c41 0 13 -20 -31 -21 l-42 -2 40 -7 40 -6 -35 -6 -35 -5 38 -1 c20 -1 37 -6 37 -11 0 -11 -58 -18 -112 -12 -47 4 -50 20 -5 22 l32 2 -30 5 -30 5 25 7 25 8 -27 1 c-30 1 -40 21 -10 21 11 0 7 6 -14 19 -18 11 -35 25 -38 33 -3 7 -4 2 0 -12 3 -14 8 -36 10 -50 l5 -25 -15 25 -15 25 -1 -27 c0 -22 5 -28 20 -28 18 0 19 -3 9 -22 -12 -22 -12 -22 -19 -3 -8 19 -8 19 -15 1 -7 -16 -9 -16 -17 -2 -6 10 -23 16 -48 16 l-40 0 0 55 0 55 -57 -2 c-57 -2 -57 -2 -10 -5 l47 -4 0 -50 c0 -42 -3 -49 -20 -49 -11 0 -20 -7 -20 -15 0 -8 -4 -15 -9 -15 -5 0 -11 7 -15 15 -3 8 -12 15 -21 15 -12 0 -15 12 -15 56 0 34 -4 53 -10 49 -5 -3 -10 -22 -10 -41 0 -22 -5 -34 -13 -34 -9 0 -12 10 -9 30 2 17 -1 36 -7 44 -6 7 -9 15 -6 17 2 3 45 6 94 6 l90 2 6 -31z m-157 -107 c-7 -11 -16 -17 -20 -14 -10 5 10 33 23 33 5 0 4 -9 -3 -19z m5 -136 c6 -7 10 -6 14 3 3 7 22 12 47 12 37 0 42 -3 44 -24 1 -21 -2 -24 -40 -24 -24 -1 -46 5 -50 11 -6 9 -11 8 -18 -3 -8 -13 -10 -12 -11 5 -1 17 -2 17 -6 3 -3 -13 -15 -18 -39 -18 -30 0 -34 3 -34 26 0 24 3 25 43 23 23 -2 46 -8 50 -14z").attr({fill:"green",opacity:0.4});
                     }
                 },
-                areas: {
-                    "1": {
-                        attrs: {
-                            fill: "#85C8A1"
-                        },
-                        attrsHover: {
-                            fill: "#85C8A1"
-                        }
-                    },
-                    "3": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "5": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "7": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "9": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "11": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "12": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "14": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "16": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "18": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "20": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "22": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "24": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "26": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "28": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "30": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "32": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "34": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "36": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "38": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "40": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "42": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "44": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "46": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "48": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "50": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "52": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "54": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "56": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "58": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "60": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "62": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "64": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "66": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "68": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "70": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "72": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "74": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "76": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "78": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "80": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "82": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "84": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "86": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "88": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "90": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "92": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "94": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "96": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "98": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "100": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "102": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "104": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "106": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "108": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "110": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}},
-                    "112": {attrs: {fill: "#000"}, attrsHover: {fill: "#000"}}
-                }
+                areas: areas
             });
         });
 
