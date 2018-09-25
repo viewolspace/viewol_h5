@@ -132,7 +132,7 @@
             }
 
             var companyId = getQueryString("companyId");//当前查看的公司
-            if(map_2[companyId]){
+            if(companyId && map_2[companyId]){
                 companyId = map_2[companyId].split(",")[0];
             }
 //            alert(companyId);
@@ -281,12 +281,13 @@
                         eventHandlers: {
                             click: function (e, id, mapElem, textElem) {
                                 if(map_1[id]){
-                                    alert(map_1[id]);
+//                                    alert(map_1[id]);
+                                    wx.miniProgram.navigateTo({url: '/pages/company/index?id='+map_1[id]})
                                 }else{
-                                    alert(id);
+//                                    alert(id);
                                 }
 
-//                                wx.miniProgram.navigateTo({url: '/pages/company/index?id=905'})
+
                             }
                         }
                     },
