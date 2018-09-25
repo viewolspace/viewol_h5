@@ -112,6 +112,7 @@ function getPhoneCode(){
 
 //提交用户信息
 function submitInfo(){
+
     var nickname   = $("input.nickname").val()
     var age        = $("input.age").val()
     var company    = $("input.company").val()
@@ -172,9 +173,10 @@ function submitInfo(){
                 nav()
             }else{
                 alert(re.message)
+                nav()
             }
 
-           nav()
+
         },
     });
 }
@@ -187,13 +189,17 @@ function nav(){
     }
 
     if( getParamer('action')==0 ){ //我的个人中心，修改个人信息
-        wx.miniProgram.navigateTo({url: 'pages/my/index'})
+        wx.miniProgram.navigateTo({url: '/pages/my/index'})
     }
 
     if(getParamer('action')==3){
         //微信朋友圈报名流程
                                     // window.location.href="https://www.jk234.com/test/welcome.html?userId="+getParamer('userId')+"&sessionId="+getParamer('sessionId')
         window.location.href="https://www.view-ol.com/mobile/welcome.html?userId="+getParamer('userId')+"&sessionId="+getParamer('sessionId')
+    }
+
+    if( getParamer('action')==4 ){ //报名  完善个人信息
+        wx.miniProgram.redirectTo({url: '/pages/activity/info?id='+getParamer('acid')})
     }
     
 }
