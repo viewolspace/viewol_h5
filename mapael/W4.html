@@ -115,8 +115,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js" charset="utf-8"></script>
     <script src="js/jquery.mapael.js" charset="utf-8"></script>
     <script src="js/maps/W4.js" charset="utf-8"></script>
+    <script src="W4_mapping.js" charset="utf-8"></script>
 
     <script type="text/javascript">
+
+
+        console.log(map_1)
+
+
         $(function () {
             function getQueryString(name) {
                 var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
@@ -166,7 +172,13 @@
                         },
                         eventHandlers: {
                             click: function (e, id, mapElem, textElem) {
-                                wx.miniProgram.navigateTo({url: '/pages/company/index?id=905'})
+                                if(map_1[id]){
+                                    alert(map_1[id]);
+                                }else{
+                                    alert(id);
+                                }
+
+//                                wx.miniProgram.navigateTo({url: '/pages/company/index?id=905'})
                             }
                         }
                     },
