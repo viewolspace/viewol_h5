@@ -116,7 +116,6 @@
     <script src="js/jquery.mapael.js" charset="utf-8"></script>
     <script src="js/maps/E4.js" charset="utf-8"></script>
     <script src="js/maps/E4_mapping.js" charset="utf-8"></script>
-
     <script type="text/javascript">
         $(function () {
             function getQueryString(name) {
@@ -127,7 +126,9 @@
             }
 
             var companyId = getQueryString("companyId");//当前查看的公司
-            // companyId = 389;
+            if(companyId && map_2[companyId]){
+                companyId = map_2[companyId].split(",")[0];
+            }
             var recommendIds = [];//推荐公司,调接口查询
 
             var areas = {
@@ -377,11 +378,10 @@
                         eventHandlers: {
                             click: function (e, id, mapElem, textElem) {
                                 if(map_1[id]){
-                                    alert(map_1[id]);
+                                    wx.miniProgram.navigateTo({url: '/pages/company/index?id='+map_1[id]})
                                 }else{
-                                    alert(id);
+//                                    alert(id);
                                 }
-//                                wx.miniProgram.navigateTo({url: '/pages/company/index?id=905'})
                             }
                         }
                     },

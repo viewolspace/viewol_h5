@@ -29,8 +29,8 @@
         {
             maps :{
                 E3 : {
-                    width : 490.1,
-                    height : 710.4,
+                    width : 439.8,
+                    height : 712.1,
                     getCoords : function (lat, lon) {
                         var xfactor = 2.775076875916;
                         var xoffset = 471.505926315;

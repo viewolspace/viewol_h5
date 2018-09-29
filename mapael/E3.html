@@ -115,6 +115,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js" charset="utf-8"></script>
     <script src="js/jquery.mapael.js" charset="utf-8"></script>
     <script src="js/maps/E3.js" charset="utf-8"></script>
+    <script src="js/maps/E3_mapping.js" charset="utf-8"></script>
 
     <script type="text/javascript">
         $(function () {
@@ -126,7 +127,9 @@
             }
 
             var companyId = getQueryString("companyId");//当前查看的公司
-            // companyId = 1066;
+            if(companyId && map_2[companyId]){
+                companyId = map_2[companyId].split(",")[0];
+            }
             var recommendIds = [422,623,274];//推荐公司,调接口查询
 
             var areas = {
@@ -284,7 +287,11 @@
                         },
                         eventHandlers: {
                             click: function (e, id, mapElem, textElem) {
-                                wx.miniProgram.navigateTo({url: '/pages/company/index?id=905'})
+                                if(map_1[id]){
+                                    wx.miniProgram.navigateTo({url: '/pages/company/index?id='+map_1[id]})
+                                }else{
+//                                    alert(id);
+                                }
                             }
                         }
                     },

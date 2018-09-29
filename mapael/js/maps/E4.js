@@ -29,8 +29,8 @@
         {
             maps :{
                 E4 : {
-                    width : 1190.5,
-                    height : 841.9,
+                    width : 302.5,
+                    height : 710.5,
                     getCoords : function (lat, lon) {
                         var xfactor = 2.775076875916;
                         var xoffset = 471.505926315;
